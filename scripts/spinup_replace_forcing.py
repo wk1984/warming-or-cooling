@@ -34,9 +34,9 @@ for r,reg in enumerate(regions):
         print(direc)
         
         search.change_value(xml, ['cycle driver','end time'], 2)  
-        search.change_value(xml, ['visualization','domain','times start period stop'], "{1, 1, -1}") 
-        search.change_value(xml, ['visualization','snow','times start period stop'], "{1, 1, -1}") 
-        search.change_value(xml, ['visualization','surface','times start period stop'], "{1, 1, -1}") 
+        search.change_value(xml, ['visualization','domain','times start period stop'], "{0, 1, -1}") 
+        search.change_value(xml, ['visualization','snow','times start period stop'], "{0, 1, -1}") 
+        search.change_value(xml, ['visualization','surface','times start period stop'], "{0, 1, -1}") 
         
         search.change_value(xml, ['regions','subsurface domain peat','region: labeled set','file'], mesh_path)
         search.change_value(xml, ['regions','subsurface domain mineral','region: labeled set','file'], mesh_path)
