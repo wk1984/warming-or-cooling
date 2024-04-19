@@ -2,7 +2,7 @@ import sys, os
 sys.path.insert(0, os.environ['ATS_BASE'] + '/repos/amanzi/tools/amanzi_xml/')
 import amanzi_xml.utils.io
 import amanzi_xml.utils.search as search
-import cPickle as pickle
+# import cPickle as pickle
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -25,40 +25,34 @@ for r,reg in enumerate(regions):
     for j in ['02', '05']:
         mesh = 'column_' + j + 'peat.exo'
         mesh_path = '../../../../data/' + mesh
+        restart_path = basepath + '/regions/' + reg + '/' + j + 'peat/' + 'spinup/checkpoint_final.h5'
         for mode in ['i', 'c']:
             direc = basepath + '/regions/' + reg + '/' + j + 'peat/' + mode
             xml = amanzi_xml.utils.io.fromFile(
                 basepath + '/templates/template.xml')
             print(direc)
-            search.searchAndReplaceByName(xml,
-                                          'regions/subsoil/region: plane/point=' + subsoil)
-            search.searchAndReplaceByName(xml,
-                                          'regions/subsurface domain peat/region: labeled set/file=' + mesh_path)
-            search.searchAndReplaceByName(xml,
-                                          'regions/subsurface domain mineral/region: labeled set/file=' + mesh_path)
-            search.searchAndReplaceByName(xml,
-                                          'regions/surface face/region: labeled set/file=' + mesh_path)
-            search.searchAndReplaceByName(xml,
-                                          'regions/bottom face/region: labeled set/file=' + mesh_path)
-            search.searchAndReplaceByName(xml,
-                                          'mesh/domain/read mesh file parameters/file=' + mesh_path)
-            search.searchAndReplaceByName(xml,
-                                          'state/field evaluators/surface-incoming_shortwave_radiation/function/domain/function/function-tabular/file=' + base_forcing)
-            search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/surface-air_temperature/function/domain/function/function-tabular/file=' + base_forcing)
-            search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/surface-relative_humidity/function/domain/function/function-tabular/file=' +  base_forcing)
-            search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/surface-wind_speed/function/domain/function/function-tabular/file=' + base_forcing)
+            
+            search.change_value(xml, ['regions','subsoil','region: plane','point'], subsoil)
+            search.change_value(xml, ['regions','subsurface domain peat','region: labeled set','file'], mesh_path)
+            search.change_value(xml, ['regions','subsurface domain mineral','region: labeled set','file'], mesh_path)
+            search.change_value(xml, ['regions','surface face','region: labeled set','file'], mesh_path)
+            search.change_value(xml, ['regions','bottom face','region: labeled set','file'], mesh_path)
+            search.change_value(xml, ['mesh','domain','read mesh file parameters','file'], mesh_path)
+            search.change_value(xml, ['state','field evaluators','surface-incoming_shortwave_radiation','function','domain','function','function-tabular','file'], base_forcing)
+            search.change_value(xml, ['state','field evaluators','surface-air_temperature','function','domain','function','function-tabular','file'], base_forcing)
+            search.change_value(xml, ['state','field evaluators','surface-relative_humidity','function','domain','function','function-tabular','file'], base_forcing)
+            search.change_value(xml, ['state','field evaluators','surface-wind_speed','function','domain','function','function-tabular','file'], base_forcing)
+            
             if mode == 'i':
-                search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/surface-precipitation_rain/function/domain/function/function-tabular/file=' + irrigation_forcing)
+                 search.change_value(xml, ['state','field evaluators','surface-precipitation_rain','function','domain','function','function-tabular','file'], irrigation_forcing)
             else:
-                search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/surface-precipitation_rain/function/domain/function/function-tabular/file=' + base_forcing)
-
-            search.searchAndReplaceByName(xml,
-                                           'state/field evaluators/snow-precipitation/function/domain/function/function-tabular/file=' + base_forcing)
+                 search.change_value(xml, ['state','field evaluators','surface-precipitation_rain','function','domain','function','function-tabular','file'], base_forcing)
+                 
+            search.change_value(xml, ['state','field evaluators','snow-precipitation','function','domain','function','function-tabular','file'], base_forcing)
+            
+            search.change_value(xml, ['PKs','subsurface flow','initial condition','restart file'], restart_path)   
+            search.change_value(xml, ['PKs','subsurface energy','initial condition','restart file'], restart_path)    
+        
             if not os.path.exists(direc):
                 os.mkdir(direc)
             os.chdir(direc)
