@@ -1,5 +1,9 @@
 ## We revised the codes to make them working well. 
 
+1. to use ATS in docker,  may only for debug ... because it is really slow when writing files to local ... 
+
+		docker run -it --name WoC --volume=$PWD:/home:delegated --workdir=/home -p 3212:8888 --restart=no --runtime=runc -t -d wk1984/ats120_2023
+
 ## Original notes ...
 
 Warming or cooling? The impact of heavy summer rainfall on permafrost environments
