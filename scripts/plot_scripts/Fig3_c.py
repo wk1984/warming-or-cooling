@@ -26,7 +26,7 @@ args = parser.parse_args()
 
 plot_dir = str(args.directory)
 
-locale.setlocale(locale.LC_ALL,'en_US.utf8')
+# locale.setlocale(locale.LC_ALL,'en_US.utf8')
 
 def absmax(a):
     mi = np.min(a)
@@ -71,7 +71,7 @@ for k in range(len(regions)):
     plt.figure(figsize=(7,5))
     zaa_c = np.zeros((138,4))
     zaa_i = np.zeros((138,4))
-    directory2 = basepath + '/regions/'+regions[k]+'/'+tex+'/dry_i'
+    directory2 = basepath + '/regions/'+regions[k]+'/'+tex+'/i'
     vis = ats_xdmf.VisFile(directory2, time_unit='d')
     vis.loadMesh(columnar=True)
     dati = np.array([vis.getArray(v) for v in ["temperature"]])
@@ -79,7 +79,7 @@ for k in range(len(regions)):
     temp_i = dati[0,:365*2,:]-273.15
 
 
-    directory3 = basepath + '/regions/'+regions[k]+'/'+tex+'/dry_c'
+    directory3 = basepath + '/regions/'+regions[k]+'/'+tex+'/c'
     vis = ats_xdmf.VisFile(directory3, time_unit='d')
     vis.loadMesh(columnar=True)
     z = vis.centroids[:,2]
@@ -90,7 +90,7 @@ for k in range(len(regions)):
 colors = ['darkorange','navy', 'darkorange', 'navy']
 ls = ['-', '-', '--', '--']
 alt = np.zeros((2,len(regions)))
-scenarios = ['dry_c', 'dry_i']
+scenarios = ['c', 'i']
 fig,ax = plt.subplots(figsize=(10,3))
 for k in range(len(regions)):
     print(regions[k])
