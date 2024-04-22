@@ -108,6 +108,18 @@
         <Parameter name="regions" type="Array(string)" value="{boundary plane 3, water table box}" />
       </ParameterList>
     </ParameterList>
+    <ParameterList name="topsoil" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="normal" type="Array(double)" value="{ 0, 0, 1}" />
+        <Parameter name="point" type="Array(double)" value="{ 0.5, 0.5, -0.02}" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="subsoil" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="normal" type="Array(double)" value="{ 0, 0, 1}" />
+        <Parameter name="point" type="Array(double)" value="{ 0.5, 0.5, -0.4}" />
+      </ParameterList>
+    </ParameterList>
   </ParameterList>
 
   <ParameterList name="cycle driver" type="ParameterList">
