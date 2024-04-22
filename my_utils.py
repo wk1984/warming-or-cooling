@@ -53,7 +53,7 @@ class my_utils:
         # import ats_xdmf
         vis = ats_xdmf.VisFile(folder, time_unit=time_unit)
         vis.loadMesh(columnar=True)
-        va = vis.getArray(variable)[1:length+1, ]
+        va = vis.getArray(variable)[:length, ]
         t0 = pd.date_range(date_onset, periods=va.shape[0], freq='1'+time_unit)
         da = vis.centroids[:, 2] # depth
 
