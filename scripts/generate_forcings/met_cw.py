@@ -7,7 +7,7 @@ def repeat_cycle(met, d):
     Svar = []
     for i in range(d):
         Svar = np.append(Svar, met[0:365])
-        print(i)
+        # print(i)
     return Svar
 
 basepath = os.path.abspath(os.path.join(os.getcwd(), os.pardir,os.pardir))
@@ -57,17 +57,17 @@ rain_i_50less = rain.copy()
 p_old = rain_i[[166, 196, 227]]
 p_new = np.array([32,45,50])
 rain_i[[166, 196, 227]] = p_new
-rain_i_50more[[166, 196, 227]] = p_new*1.5
-rain_i_50less[[166, 196, 227]] = p_new*0.5
+# rain_i_50more[[166, 196, 227]] = p_new*1.5
+# rain_i_50less[[166, 196, 227]] = p_new*0.5
 rr_c = repeat_cycle(rain, years)
 
 swin = repeat_cycle(G, years)
 t = repeat_cycle(T, years)
 rr = repeat_cycle(rain, 10)
 rr_i = np.concatenate((rr, rain_i, rr,rain))
-rr_i_50more = np.concatenate((rr, rain_i_50more, rr, rain))
-rr_i_50less = np.concatenate((rr, rain_i_50less, rr, rain))
-rr_i_multi = np.concatenate((rr, rain_i, rain_i, rr))
+# rr_i_50more = np.concatenate((rr, rain_i_50more, rr, rain))
+# rr_i_50less = np.concatenate((rr, rain_i_50less, rr, rain))
+# rr_i_multi = np.concatenate((rr, rain_i, rain_i, rr))
 
 
 sn = repeat_cycle(snow, years)
@@ -76,9 +76,9 @@ ws = repeat_cycle(ws, years)
 
 print("p old = " + str(p_old))
 print("p new = " + str(p_new))
-rr8 = repeat_cycle(rain,8)
-rr_i_multi3 = np.concatenate((rr8, rain_i, rain_i, rain_i, rr, rain))
-rr_i_multi4 = np.concatenate((rr8, rain_i, rain_i, rain_i, rain_i, rr))
+# rr8 = repeat_cycle(rain,8)
+# rr_i_multi3 = np.concatenate((rr8, rain_i, rain_i, rain_i, rr, rain))
+# rr_i_multi4 = np.concatenate((rr8, rain_i, rain_i, rain_i, rain_i, rr))
 
 #%%
 tim = np.arange(0.0, 86400 * 365 * 22, 86400)
@@ -101,63 +101,3 @@ with h5py.File(basepath + '/data/cw_control.h5', 'w') as hf:
     hf.create_dataset('relative humidity [-]', data=rh)
     hf.create_dataset('wind speed [m s^-1]', data=ws)
 hf.close()
-
-# with h5py.File(basepath + '/data/cw_irrigation_multi.h5', 'w') as hf:
-#     hf.create_dataset('time [s]', data=tim)
-#     hf.create_dataset('air temperature [K]', data=t+273.15)
-#     hf.create_dataset('incoming shortwave radiation [W m^-2]', data=swin)
-#     hf.create_dataset('precipitation rain [m s^-1]', data=rr_i_multi/86400000)
-#     hf.create_dataset('precipitation snow [m SWE s^-1]', data=sn/86400000)
-#     hf.create_dataset('relative humidity [-]', data=rh)
-#     hf.create_dataset('wind speed [m s^-1]', data=ws)
-# hf.close()
-# 
-# with h5py.File(basepath + '/data/cw_irrigation_50more.h5', 'w') as hf:
-#     hf.create_dataset('time [s]', data=tim)
-#     hf.create_dataset('air temperature [K]', data=t+273.15)
-#     hf.create_dataset('incoming shortwave radiation [W m^-2]', data=swin)
-#     hf.create_dataset('precipitation rain [m s^-1]', data=rr_i_50more/86400000)
-#     hf.create_dataset('precipitation snow [m SWE s^-1]', data=sn/86400000)
-#     hf.create_dataset('relative humidity [-]', data=rh)
-#     hf.create_dataset('wind speed [m s^-1]', data=ws)
-# hf.close()
-# 
-# with h5py.File(basepath + '/data/cw_irrigation_50less.h5', 'w') as hf:
-#     hf.create_dataset('time [s]', data=tim)
-#     hf.create_dataset('air temperature [K]', data=t+273.15)
-#     hf.create_dataset('incoming shortwave radiation [W m^-2]', data=swin)
-#     hf.create_dataset('precipitation rain [m s^-1]', data=rr_i_50less/86400000)
-#     hf.create_dataset('precipitation snow [m SWE s^-1]', data=sn/86400000)
-#     hf.create_dataset('relative humidity [-]', data=rh)
-#     hf.create_dataset('wind speed [m s^-1]', data=ws)
-# hf.close()
-# 
-# with h5py.File(basepath + '/data/cw_irrigation_multi4.h5', 'w') as hf:
-#     hf.create_dataset('time [s]', data=tim)
-#     hf.create_dataset('air temperature [K]', data=t+273.15)
-#     hf.create_dataset('incoming shortwave radiation [W m^-2]', data=swin)
-#     hf.create_dataset('precipitation rain [m s^-1]', data=rr_i_multi4/86400000)
-#     hf.create_dataset('precipitation snow [m SWE s^-1]', data=sn/86400000)
-#     hf.create_dataset('relative humidity [-]', data=rh)
-#     hf.create_dataset('wind speed [m s^-1]', data=ws)
-# hf.close()
-# #%%
-# 
-# rain_i = rain.copy()
-# rain_i = rain_i*1.5
-# rr_c = repeat_cycle(rain, 14)
-# 
-# rr = repeat_cycle(rain, 10)
-# rr_i = np.concatenate((rr, rain_i, rain, rain, rain))
-# 
-# #%%
-# tim = np.arange(0.0, 86400 * 365 * 14, 86400)
-# with h5py.File(basepath + '/data/cw_irrigation_grad.h5', 'w') as hf:
-#     hf.create_dataset('time [s]', data=tim)
-#     hf.create_dataset('air temperature [K]', data=t+273.15)
-#     hf.create_dataset('incoming shortwave radiation [W m^-2]', data=swin)
-#     hf.create_dataset('precipitation rain [m s^-1]', data=rr_i/86400000)
-#     hf.create_dataset('precipitation snow [m SWE s^-1]', data=sn/86400000)
-#     hf.create_dataset('relative humidity [-]', data=rh)
-#     hf.create_dataset('wind speed [m s^-1]', data=ws)
-# hf.close()
