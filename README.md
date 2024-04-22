@@ -3,6 +3,11 @@
 1. to use ATS in docker,  may only for debug ... because it is really slow when writing files to local ... 
 
 		docker run -it --name WoC --volume=$PWD:/home:delegated --workdir=/home -p 3212:8888 --restart=no --runtime=runc -t -d wk1984/ats120_2023
+		
+1. reproduced figures ...
+
+![](plots/MAINRESULT.png)
+![](plots/immediate_topsoil_Tdiff.png)
 
 ## Original notes ...
 
