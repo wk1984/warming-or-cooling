@@ -4,7 +4,7 @@
 
 		docker run -it --name WoC --volume=$PWD:/home:delegated --workdir=/home -p 3212:8888 --restart=no --runtime=runc -t -d wk1984/ats120_2023
 		
-1. reproduced figures ...
+1. reproduced figures ... Note that, those figures we produced are slightly different from Hamm et al. (2023) Nature Communications, because (1) we run spinup only for 20 years, and (2) we change "dessicated zone thickness [m]" in simulation xml files from 0.05 to 0.10, consistent with the spinup processes.
 
 ![](plots/MAINRESULT.png)
 ![](plots/immediate_topsoil_Tdiff.png)
