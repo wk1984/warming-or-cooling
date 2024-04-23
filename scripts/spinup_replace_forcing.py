@@ -39,6 +39,8 @@ for r,reg in enumerate(regions):
         search.change_value(xml, ['checkpoint','times start period stop'], "{0, 1, -1}")
         search.change_value(xml, ['checkpoint','times start period stop units'], "noleap")
         
+        search.change_value(xml, ['PKs','subsurface energy','boundary conditions','temperature','bottom','boundary temperature','function-constant', 'value'],264.15)
+        
         search.change_value(xml, ['visualization','domain','times start period stop'], "{"+str(365*18+1)+", 1, -1}")
         search.change_value(xml, ['visualization','domain','times start period stop units'], "d")
         search.change_value(xml, ['visualization','snow','times start period stop'], "{"+str(365*18+1)+", 1, -1}") 
