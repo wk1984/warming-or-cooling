@@ -38,6 +38,9 @@ for r,reg in enumerate(regions):
             search.change_value(xml, ['regions','surface face','region: labeled set','file'], mesh_path)
             search.change_value(xml, ['regions','bottom face','region: labeled set','file'], mesh_path)
             search.change_value(xml, ['mesh','domain','read mesh file parameters','file'], mesh_path)
+            
+            search.change_value(xml, ['PKs','subsurface energy','boundary conditions','temperature','bottom','boundary temperature','function-constant', 'value'],264.15)
+
             search.change_value(xml, ['state','field evaluators','surface-incoming_shortwave_radiation','function','domain','function','function-tabular','file'], base_forcing)
             search.change_value(xml, ['state','field evaluators','surface-air_temperature','function','domain','function','function-tabular','file'], base_forcing)
             search.change_value(xml, ['state','field evaluators','surface-relative_humidity','function','domain','function','function-tabular','file'], base_forcing)
